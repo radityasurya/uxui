@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-UI/UX Pro Max Search - BM25 search engine for UI/UX style guides
+uxui search - BM25 search engine for UI/UX style guides
 Usage: python search.py "<query>" [--domain <domain>] [--stack <stack>] [--max-results 3]
        python search.py "<query>" --design-system [-p "Project Name"]
        python search.py "<query>" --design-system --persist [-p "Project Name"] --output-dir "<project-root>" [--page "dashboard"]
@@ -48,10 +48,10 @@ def format_output(result, full=False):
 
     output = []
     if result.get("stack"):
-        output.append("## UI Pro Max Stack Guidelines")
+        output.append("## uxui stack guidelines")
         output.append(f"**Stack:** {result['stack']} | **Query:** {result['query']}")
     else:
-        output.append("## UI Pro Max Search Results")
+        output.append("## uxui search results")
         domain_note = result['domain']
         if result.get("auto_detected"):
             domain_note += " (auto-detected"
@@ -94,7 +94,7 @@ def format_output(result, full=False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="UI Pro Max Search")
+    parser = argparse.ArgumentParser(description="uxui search")
     parser.add_argument("query", help="Search query")
     parser.add_argument("--domain", "-d", choices=list(CSV_CONFIG.keys()), help="Search domain")
     parser.add_argument("--stack", "-s", choices=AVAILABLE_STACKS, help=f"Stack-specific search. Available: {', '.join(AVAILABLE_STACKS)}")

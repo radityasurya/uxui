@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate UI/UX Pro Max CSV data files.
+"""Validate uxui CSV data files.
 
 Checks every CSV under .claude/skills/search/data for structural issues that
 csv.DictReader otherwise accepts silently:
