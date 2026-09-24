@@ -11,13 +11,8 @@ from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "src/ui-ux-pro-max/data"
-TEMPLATES = ROOT / "src/ui-ux-pro-max/templates"
-PLATFORMS = TEMPLATES / "platforms"
-GUIDE = TEMPLATES / "base/skill-content.md"
-CLAUDE_GUIDE = ROOT / ".claude/skills/ui-ux-pro-max/SKILL.md"
-README = ROOT / "README.md"
-README_ZH = ROOT / "README.zh.md"
+DATA = ROOT / ".claude/skills/search/data"
+GUIDE = ROOT / ".claude/skills/search/SKILL.md"
 DOMAINS = {
     "product", "style", "typography", "color", "landing", "chart", "ux",
     "gsap", "react", "web", "icons", "google-fonts",
@@ -28,7 +23,6 @@ FLAGS = {
     "-f", "--persist", "--page", "--output-dir", "-o", "--force",
     "--variance", "--motion", "--density",
 }
-PLATFORM_COUNT = 20
 GUIDE_REQUIREMENTS = (
     "## Query Contract", "one dominant intent", "Retry once",
     "Do not persist unverified output", "explicit accessibility outcome terms",
@@ -78,7 +72,7 @@ def expected_description():
 
 def run_json(*args):
     command = [
-        sys.executable, str(ROOT / "src/ui-ux-pro-max/scripts/search.py"),
+        sys.executable, str(ROOT / ".claude/skills/search/scripts/search.py"),
         *args, "--json",
     ]
     completed = subprocess.run(command, check=True, capture_output=True, text=True)
@@ -127,9 +121,9 @@ def validate():
     if len(set(product_counts.values())) != 1:
         errors.append(f"product/palette/reasoning counts differ: {product_counts}")
     description = expected_description()
-    claude_text = CLAUDE_GUIDE.read_text(encoding="utf-8")
+    claude_text = GUIDE.read_text(encoding="utf-8")
     if description not in claude_text:
-        errors.append("claude: frontmatter description/counts differ from canonical metadata")
+        errors.append("SKILL.md: frontmatter description/counts differ from canonical metadata")
     styles = style_counts()
     guide_claims = (
         f"{styles['searchable']} searchable styles ({styles['active']} active)",
@@ -142,35 +136,12 @@ def validate():
     )
     for claim in guide_claims:
         if claim not in claude_text:
-            errors.append(f"claude: missing live count claim {claim!r}")
-    reasoning_count = row_count("ui-reasoning.csv")
-    public_claims = (
-        (README, (f"{reasoning_count} Reasoning Rules",
-                  f"{row_count('ux-guidelines.csv')} UX Guidelines")),
-        (README_ZH, (f"{reasoning_count} 条推理规则",
-                     f"{row_count('ux-guidelines.csv')} 条 UX 指南")),
-    )
-    for path, claims in public_claims:
-        text = path.read_text(encoding="utf-8")
-        for claim in claims:
-            if claim not in text:
-                errors.append(f"{path.name}: missing live count claim {claim!r}")
-    configs = sorted(PLATFORMS.glob("*.json"))
-    if len(configs) != PLATFORM_COUNT:
-        errors.append(f"expected {PLATFORM_COUNT} platform configs, got {len(configs)}")
-    for path in configs:
-        config = json.loads(path.read_text(encoding="utf-8"))
-        if config.get("description") != description:
-            errors.append(f"{path.name}: stale description")
-        frontmatter = config.get("frontmatter") or {}
-        if frontmatter.get("description") and frontmatter["description"] != description:
-            errors.append(f"{path.name}: stale frontmatter description")
-    for label, path in (("canonical", GUIDE), ("claude", CLAUDE_GUIDE)):
-        text = path.read_text(encoding="utf-8")
-        for phrase in GUIDE_REQUIREMENTS:
-            if phrase not in text:
-                errors.append(f"{label}: missing {phrase!r}")
-        errors.extend(validate_commands(label, text))
+            errors.append(f"SKILL.md: missing live count claim {claim!r}")
+    text = GUIDE.read_text(encoding="utf-8")
+    for phrase in GUIDE_REQUIREMENTS:
+        if phrase not in text:
+            errors.append(f"SKILL.md: missing {phrase!r}")
+    errors.extend(validate_commands("SKILL.md", text))
     design = run_json("beauty spa wellness service", "--design-system")
     if design["design_system"]["category"] != "Beauty/Spa/Wellness Service":
         errors.append("design-system example resolved wrong product category")
@@ -188,7 +159,4 @@ if __name__ == "__main__":
     if problems:
         print("Agent guide validation failed:\n- " + "\n- ".join(problems), file=sys.stderr)
         raise SystemExit(1)
-    print(
-        f"Agent guide validation passed: {PLATFORM_COUNT} platforms "
-        "and 3 locked examples checked."
-    )
+    print("Agent guide validation passed: SKILL.md and 3 locked examples checked.")

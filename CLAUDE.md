@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-UI UX Pro Max is an AI-powered design intelligence toolkit providing searchable databases of UI styles, color palettes, font pairings, chart types, and UX guidelines. It works as a skill/workflow for AI coding assistants (Claude Code, Windsurf, Cursor, etc.).
+uxui is a design-data and recommendation plugin: searchable databases of UI styles, color palettes, font pairings, chart types, and UX guidelines, plus generator skills. It ships as a plugin for AI coding assistants (Claude Code, Codex).
 
 ## Search Command
 
 ```bash
-python3 src/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain> [-n <max_results>]
+python3 .claude/skills/search/scripts/search.py "<query>" --domain <domain> [-n <max_results>]
 ```
 
 **Domain search:**
@@ -28,79 +28,58 @@ python3 src/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain> [-n <max
 
 **Design dials (optional, only with `--design-system`):**
 ```bash
-python3 src/ui-ux-pro-max/scripts/search.py "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
+python3 .claude/skills/search/scripts/search.py "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
 ```
 `--variance` biases style selection (centered/minimal → bold/asymmetric), `--motion` attaches a matching GSAP snippet from `motion.csv`, `--density` overrides the spacing-scale tokens (spacious → dense/dashboard). Any dial left unset behaves exactly as before.
 
 **Stack search:**
 ```bash
-python3 src/ui-ux-pro-max/scripts/search.py "<query>" --stack <stack>
+python3 .claude/skills/search/scripts/search.py "<query>" --stack <stack>
 ```
 Available stacks: `html-tailwind` (default), `react`, `nextjs`, `astro`, `vue`, `nuxtjs`, `nuxt-ui`, `svelte`, `swiftui`, `react-native`, `flutter`, `shadcn`, `jetpack-compose`, `threejs`, `angular`, `laravel`, `javafx`, `wpf`, `winui`, `avalonia`, `uno`, `uwp`
 
 ## Architecture
 
 ```
-src/ui-ux-pro-max/                # Source of Truth
-├── data/                         # Canonical CSV databases
-│   ├── products.csv, styles.csv, colors.csv, typography.csv, ...
-│   └── stacks/                   # Stack-specific guidelines
-├── scripts/
-│   ├── search.py                 # CLI entry point
-│   ├── core.py                   # BM25 + regex hybrid search engine
-│   └── design_system.py          # Design system generation
-└── templates/
-    ├── base/                     # Base templates (skill-content.md, quick-reference.md)
-    └── platforms/                # Platform configs (claude.json, cursor.json, ...)
+.claude/skills/                    # The plugin skills — single source of truth
+├── search/                        # Design data + search engine
+│   ├── data/                      # Canonical CSV databases
+│   │   ├── products.csv, styles.csv, colors.csv, typography.csv, ...
+│   │   └── stacks/                # Stack-specific guidelines
+│   ├── scripts/
+│   │   ├── search.py              # CLI entry point
+│   │   ├── core.py                # BM25 + regex hybrid search engine
+│   │   └── design_system.py       # Design system generation
+│   └── references/                # Quick reference docs
+├── styling/                       # UI styling skill (Apache-2.0 — see its LICENSE.txt)
+├── banner/                        # Banner design skill
+├── brand/                         # Brand identity skill
+├── design/                        # Logo/CIP/social-photos generator skill
+├── design-system/                 # Token architecture + slides skill
+└── slides/                        # HTML presentation skill
 
-cli/                              # CLI installer (ui-ux-pro-max-cli on npm)
-├── src/
-│   ├── commands/init.ts          # Install command with template generation
-│   └── utils/template.ts         # Template rendering engine
-├── scripts/sync-assets.mjs       # Mirrors src/ -> cli/assets/ AND src/ -> .claude/skills/ui-ux-pro-max/
-└── assets/                       # Bundled assets (~564KB)
-    ├── data/                     # Copy of src/ui-ux-pro-max/data/
-    ├── scripts/                  # Copy of src/ui-ux-pro-max/scripts/
-    └── templates/                # Copy of src/ui-ux-pro-max/templates/
-
-.claude/skills/ui-ux-pro-max/     # Claude Code skill: hand-authored SKILL.md +
-                                   # data/, scripts/ mirrored from src/ (see Sync Rules)
-.claude-plugin/                   # Claude Marketplace publishing
+.claude-plugin/                    # Plugin manifest and marketplace metadata
+scripts/                           # Repo-level validation and catalog refresh scripts
+docs/                              # ADRs and journals
 ```
 
 The search engine uses BM25 ranking combined with regex matching. Domain auto-detection is available when `--domain` is omitted.
 
-## Sync Rules
+## Validation
 
-**Source of Truth:** `src/ui-ux-pro-max/`
+After changing data or scripts, run:
 
-There are no symlinks in this repo (git-on-Windows checks them out as plain
-text files pointing at a path, which silently breaks the skill) -- every
-mirrored copy below is a real, independently-committed file kept in sync by
-`cli/scripts/sync-assets.mjs`, enforced by the "Check asset sync" CI workflow.
+```bash
+python3 scripts/validate-csv.py
+python3 scripts/validate-agent-guide.py
+python3 scripts/generate-catalog-summary.py --check
+python3 -m unittest discover -s .claude/skills/search/scripts/tests -p 'test_*.py'
+bash scripts/smoke-domains.sh
+bash scripts/smoke-stacks.sh
+```
 
-When modifying files:
-
-1. **Data & Scripts** - Edit in `src/ui-ux-pro-max/`:
-   - `data/*.csv` and `data/stacks/*.csv`
-   - `scripts/*.py`
-   - Then run the sync below -- changes are NOT automatically reflected anywhere else.
-
-2. **Templates** - Edit in `src/ui-ux-pro-max/templates/`:
-   - `base/skill-content.md` - Common SKILL.md content
-   - `base/quick-reference.md` - Quick reference section (Claude only)
-   - `platforms/*.json` - Platform-specific configs
-
-3. **Sync before publishing / committing data or script changes:**
-   ```bash
-   cd cli
-   npm run sync:assets   # mirrors src/ -> cli/assets/ AND src/ -> .claude/skills/ui-ux-pro-max/{data,scripts}
-   npm run check:assets  # verify, no npm install required
-   ```
-   `.claude/skills/ui-ux-pro-max/SKILL.md` itself is hand-authored, not
-   mirrored or template-generated -- edit it directly.
-
-4. **Reference Folders** - No manual sync needed. The CLI generates these from templates during `uipro init`.
+`.claude/skills/styling/` is Apache-2.0: add a "Modified by radityasurya, 2026." mark
+near the top of every file you change inside that folder.
 
 ## Prerequisites
 

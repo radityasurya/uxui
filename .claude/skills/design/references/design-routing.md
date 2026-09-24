@@ -8,11 +8,11 @@ When to use each design sub-skill.
 |-------|---------|-----------|
 | brand | Brand identity, voice, assets | SKILL.md + 10 references + 3 scripts |
 | design-system | Token architecture, specs | SKILL.md + 7 references + 2 scripts |
-| ui-styling | Component implementation | SKILL.md + 7 references + 2 scripts |
+| styling | Component implementation | SKILL.md + 7 references + 2 scripts |
 | logo-design | AI logo generation (55 styles, 30 palettes) | SKILL.md + 4 references + 2 scripts |
 | cip-design | Corporate Identity Program (50 deliverables) | SKILL.md + 3 references + 3 scripts |
 | slides | HTML presentations with Chart.js | SKILL.md + 4 references |
-| banner-design | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference |
+| banner | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference |
 | icon-design | SVG icon generation (15 styles, Gemini 3.1 Pro) | SKILL.md + 1 reference + 1 script |
 
 ## Routing by Task Type
@@ -38,7 +38,7 @@ When to use each design sub-skill.
 - Document state and variants
 
 ### Implementation Tasks
-**→ ui-styling**
+**→ styling**
 
 - Add shadcn/ui components
 - Style with Tailwind classes
@@ -71,7 +71,7 @@ When to use each design sub-skill.
 - Use layout patterns and design tokens
 
 ### Banner Design Tasks
-**→ banner-design**
+**→ banner**
 
 - Design banners for social media (Facebook, Twitter, LinkedIn, YouTube, Instagram)
 - Create ad banners (Google Ads, Meta Ads)
@@ -94,18 +94,18 @@ When to use each design sub-skill.
 |----------|-------|
 | "What color should this be?" | brand |
 | "How do I create a token for X?" | design-system |
-| "How do I build a button component?" | ui-styling |
+| "How do I build a button component?" | styling |
 | "Is this on-brand?" | brand |
 | "Should I use a CSS variable here?" | design-system |
-| "How do I add dark mode?" | ui-styling |
+| "How do I add dark mode?" | styling |
 | "Create a logo for my brand" | logo-design |
 | "Generate business card mockups" | cip-design |
 | "Create a pitch deck" | slides |
 | "Design brand identity package" | cip-design |
 | "What logo style fits my industry?" | logo-design |
-| "Design a Facebook cover" | banner-design |
-| "Create ad banners for Google" | banner-design |
-| "Make a website hero banner" | banner-design |
+| "Design a Facebook cover" | banner |
+| "Create ad banners for Google" | banner |
+| "Make a website hero banner" | banner |
 | "Generate a settings icon" | icon-design |
 | "Create SVG icons for my app" | icon-design |
 | "Design an icon set" | icon-design |
@@ -121,7 +121,7 @@ When to use each design sub-skill.
 2. design-system → Create tokens
    - Primitive, semantic, component
 
-3. ui-styling → Implement
+3. styling → Implement
    - Configure Tailwind, add components
 ```
 
@@ -134,7 +134,7 @@ When to use each design sub-skill.
 2. design-system → Formalize tokens
    - Create three-layer architecture
 
-3. ui-styling → Update code
+3. styling → Update code
    - Replace hardcoded values
 ```
 
@@ -144,7 +144,7 @@ When to use each design sub-skill.
 1. design-system → Reference specs
    - Button states, sizes, variants
 
-2. ui-styling → Implement
+2. styling → Implement
    - Build with shadcn/ui + Tailwind
 ```
 
@@ -155,7 +155,7 @@ brand
     ↓ (colors, typography)
 design-system
     ↓ (tokens, specs)
-ui-styling
+styling
     ↓ (components)
 Application Code
 ```
@@ -184,7 +184,7 @@ npx shadcn@latest add button card input
 Use **all eight** when:
 - Complete brand package from scratch (logo → CIP → presentation)
 
-Use **brand + design-system + ui-styling** when:
+Use **brand + design-system + styling** when:
 - Design system setup and implementation
 
 Use **logo-design + cip-design** when:
@@ -193,7 +193,7 @@ Use **logo-design + cip-design** when:
 Use **logo-design + cip-design + slides** when:
 - Brand pitch: generate logo, create CIP mockups, build pitch deck
 
-Use **banner-design + brand** when:
+Use **banner + brand** when:
 - Social media presence: branded banners across all platforms
 
 Use **icon-design + design-system** when:
@@ -202,6 +202,6 @@ Use **icon-design + design-system** when:
 Use **brand + design-system** when:
 - Defining design language without implementation
 
-Use **design-system + ui-styling** when:
+Use **design-system + styling** when:
 - Implementing existing brand in code
 - Building component library

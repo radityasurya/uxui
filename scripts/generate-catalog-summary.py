@@ -10,7 +10,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "src/ui-ux-pro-max/data"
+DATA = ROOT / ".claude/skills/search/data"
 OUTPUT = DATA / "catalog-summary.json"
 
 
@@ -98,12 +98,6 @@ def check_readme_counts(summary):
             f"**{exclusions} review exclusions**",
             f"**{counts['curatedIcons']} curated rows**",
             f"**{counts['upstreamPhosphorIcons']:,}-icon upstream Phosphor manifest**",
-        ),
-        "README.zh.md": (
-            f"**{counts['googleFonts']:,} 个已批准的 Google Fonts**",
-            f"**{exclusions} 个待审核的排除项**",
-            f"**{counts['curatedIcons']} 条精选记录**",
-            f"**{counts['upstreamPhosphorIcons']:,}-icon Phosphor upstream manifest**",
         ),
     }
     for name, tokens in expected.items():

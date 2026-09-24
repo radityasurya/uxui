@@ -166,7 +166,7 @@ jobs:
           python3 scripts/refresh-google-fonts.py \
             --api-input "${REVIEW_ROOT}/raw/google-fonts-api.json" \
             --metadata-root "${RUNNER_TEMP}/catalog-work/google-fonts" \
-            --existing-csv src/ui-ux-pro-max/data/google-fonts.csv \
+            --existing-csv .claude/skills/search/data/google-fonts.csv \
             --output-csv "${REVIEW_ROOT}/candidates/google-fonts.csv" \
             --license-output "${REVIEW_ROOT}/candidates/google-font-licenses.json" \
             --metadata-revision "$(cat "${REVIEW_ROOT}/raw/google-fonts-revision.txt")" \
@@ -180,19 +180,19 @@ jobs:
             --package-json "${REVIEW_ROOT}/raw/phosphor-core-package.json" \
             --react-package-json "${REVIEW_ROOT}/raw/phosphor-react-package.json" \
             --react-exports-input "${REVIEW_ROOT}/raw/phosphor-react-exports.json" \
-            --curated-csv src/ui-ux-pro-max/data/icons.csv \
+            --curated-csv .claude/skills/search/data/icons.csv \
             --output "${REVIEW_ROOT}/candidates/phosphor-icons-upstream.json" \
             --verified-at "${review_date}" \
             >"${REVIEW_ROOT}/reports/phosphor-refresh.log" \
             2>"${REVIEW_ROOT}/reports/phosphor-error.log"
           icon_status=$?
-          diff -u src/ui-ux-pro-max/data/google-fonts.csv \
+          diff -u .claude/skills/search/data/google-fonts.csv \
             "${REVIEW_ROOT}/candidates/google-fonts.csv" \
             >"${REVIEW_ROOT}/reports/google-fonts.diff" 2>&1 || true
-          diff -u src/ui-ux-pro-max/data/google-font-licenses.json \
+          diff -u .claude/skills/search/data/google-font-licenses.json \
             "${REVIEW_ROOT}/candidates/google-font-licenses.json" \
             >"${REVIEW_ROOT}/reports/google-font-licenses.diff" 2>&1 || true
-          diff -u src/ui-ux-pro-max/data/phosphor-icons-upstream.json \
+          diff -u .claude/skills/search/data/phosphor-icons-upstream.json \
             "${REVIEW_ROOT}/candidates/phosphor-icons-upstream.json" \
             >"${REVIEW_ROOT}/reports/phosphor-icons-upstream.diff" 2>&1 || true
           printf 'google_fonts=%s\nphosphor=%s\n' "${font_status}" "${icon_status}" \

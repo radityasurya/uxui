@@ -16,7 +16,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRIPTS_DIR="$REPO_ROOT/src/ui-ux-pro-max/scripts"
+SCRIPTS_DIR="$REPO_ROOT/.claude/skills/search/scripts"
 SEARCH="$SCRIPTS_DIR/search.py"
 
 QUERY_OVERRIDE="${1:-}"

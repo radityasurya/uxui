@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNTIME_DIR = ROOT / "src/ui-ux-pro-max/scripts"
+RUNTIME_DIR = ROOT / ".claude/skills/search/scripts"
 FIXTURE_DIR = RUNTIME_DIR / "tests/fixtures"
 sys.path.insert(0, str(RUNTIME_DIR))
 sys.path.insert(0, str(ROOT / "scripts"))

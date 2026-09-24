@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate UI/UX Pro Max CSV data files.
 
-Checks every CSV under src/ui-ux-pro-max/data for structural issues that
+Checks every CSV under .claude/skills/search/data for structural issues that
 csv.DictReader otherwise accepts silently:
 - duplicate or blank header names
 - rows with too many fields (unquoted commas)
@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / "src" / "ui-ux-pro-max" / "data"
+DATA_DIR = REPO_ROOT / ".claude" / "skills" / "search" / "data"
 
 # Every CSV under data/ is a runtime dataset loaded by core.py.
 # (Former reference-only notes design.csv/draft.csv were removed: they were

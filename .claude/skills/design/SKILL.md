@@ -29,7 +29,7 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 |------|-----------|---------|
 | Brand identity, voice, assets | `brand` | Bundled sibling skill |
 | Tokens, specs, CSS vars | `design-system` | Bundled sibling skill |
-| shadcn/ui, Tailwind, code | `ui-styling` | Bundled sibling skill |
+| shadcn/ui, Tailwind, code | `styling` | Bundled sibling skill |
 | Logo creation, AI generation | Logo (built-in) | `references/logo-design.md` |
 | CIP mockups, deliverables | CIP (built-in) | `references/cip-design.md` |
 | Presentations, pitch decks | Slides (built-in) | `references/slides.md` |
@@ -74,7 +74,7 @@ python3 scripts/logo/generate.py --brand "TechFlow" --provider muapi --muapi-mod
 
 **IMPORTANT:** When scripts fail, try to fix them directly.
 
-After generation, **ALWAYS** ask user about HTML preview via `AskUserQuestion`. If yes, use the bundled `ui-ux-pro-max` skill for the gallery.
+After generation, **ALWAYS** ask user about HTML preview via `AskUserQuestion`. If yes, use the bundled `search` skill for the gallery.
 
 ## CIP Design (Built-in)
 
@@ -139,14 +139,14 @@ Load `references/slides-create.md` for the creation workflow.
 
 ## Banner Design (Built-in)
 
-22 art direction styles across social, ads, web, print. This workflow needs nothing outside the bundle: `references/banner-sizes-and-styles.md` and the bundled `ui-ux-pro-max` skill for style and palette guidance. Browser research, image generation, and screenshot capture are optional runtime capabilities; when unavailable, use supplied assets, CSS-built visuals, and the runtime's standard preview or capture workflow.
+22 art direction styles across social, ads, web, print. This workflow needs nothing outside the bundle: `references/banner-sizes-and-styles.md` and the bundled `search` skill for style and palette guidance. Browser research, image generation, and screenshot capture are optional runtime capabilities; when unavailable, use supplied assets, CSS-built visuals, and the runtime's standard preview or capture workflow.
 
 Load `references/banner-sizes-and-styles.md` for complete sizes and styles reference.
 
 ### Banner: Workflow
 
 1. **Gather requirements** via `AskUserQuestion` — purpose, platform, content, brand, style, quantity
-2. **Research** — Read `references/banner-sizes-and-styles.md` and use the bundled `ui-ux-pro-max` skill for style and palette guidance; if browser research is available and permitted, collect 3–5 references
+2. **Research** — Read `references/banner-sizes-and-styles.md` and use the bundled `search` skill for style and palette guidance; if browser research is available and permitted, collect 3–5 references
 3. **Design** — Create the HTML/CSS banner at exact platform dimensions; use supplied assets or CSS-built visuals, or an authorized image-generation capability if the runtime provides one
 4. **Export** — Capture PNG at exact dimensions with the runtime's browser or screenshot capability; if unavailable, deliver the HTML/CSS source and mark PNG export as pending
 5. **Present** — Show all options side-by-side, iterate on feedback
@@ -224,7 +224,7 @@ python3 scripts/icon/generate.py --prompt "user profile" --sizes "16,24,32,48" -
 
 ## Social Photos (Built-in)
 
-Multi-platform social image design: HTML/CSS → screenshot export. Uses the bundled `ui-ux-pro-max`, `brand`, and `design-system` skills; screenshot export runs through Chrome headless, Playwright, or Puppeteer (see the reference).
+Multi-platform social image design: HTML/CSS → screenshot export. Uses the bundled `search`, `brand`, and `design-system` skills; screenshot export runs through Chrome headless, Playwright, or Puppeteer (see the reference).
 
 Load `references/social-photos-design.md` for sizes, templates, best practices.
 
@@ -233,7 +233,7 @@ Load `references/social-photos-design.md` for sizes, templates, best practices.
 1. **Orchestrate** — Track the steps below with the runtime's native task list; parallel subagents for independent work
 2. **Analyze** — Parse prompt: subject, platforms, style, brand context, content elements
 3. **Ideate** — 3-5 concepts, present via `AskUserQuestion`
-4. **Design** — bundled `brand` → `design-system` → `ui-ux-pro-max` skills; HTML per idea × size
+4. **Design** — bundled `brand` → `design-system` → `search` skills; HTML per idea × size
 5. **Export** — Chrome headless, Playwright, or Puppeteer screenshot at exact px (2x device scale factor where the tool supports it; see the reference)
 6. **Verify** — Open the exported PNGs in an available browser or image viewer and inspect them; fix layout/styling issues and re-export
 7. **Report** — Summary to `plans/reports/` with design decisions
@@ -260,7 +260,7 @@ Load `references/social-photos-design.md` for sizes, templates, best practices.
 
 1. **Brand** (brand skill) → Define colors, typography, voice
 2. **Tokens** (design-system skill) → Create semantic token layers
-3. **Implement** (ui-styling skill) → Configure Tailwind, shadcn/ui
+3. **Implement** (styling skill) → Configure Tailwind, shadcn/ui
 
 ## References
 
@@ -329,5 +329,5 @@ logo workflow leaves at the provider default.
 
 ## Integration
 
-**Bundled sub-skills:** brand, design-system, ui-styling
-**Related Skills:** ui-ux-pro-max
+**Bundled sub-skills:** brand, design-system, styling
+**Related Skills:** search

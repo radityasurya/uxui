@@ -1,21 +1,21 @@
 {
-  "name": "ui-ux-pro-max-skill",
-  "id": "ui-ux-pro-max-skill",
+  "name": "uxui",
+  "id": "uxui",
   "owner": {
-    "name": "nextlevelbuilder"
+    "name": "radityasurya"
   },
   "metadata": {
-    "description": "UI/UX design intelligence skill with 79 styles, 192 palettes, 74 font pairings, 25 charts, and 22 stack guidelines",
-    "version": "2.13.0"
+    "description": "Design data and recommendation layer: styles, palettes, font pairings, charts, and stack guidelines for AI coding assistants",
+    "version": "0.1.0"
   },
   "plugins": [
     {
-      "name": "ui-ux-pro-max",
+      "name": "uxui",
       "source": "./",
-      "description": "Professional UI/UX design intelligence for AI coding assistants. Includes searchable databases of styles, colors, typography, charts, and UX guidelines for React, Next.js, Astro, Vue, Nuxt.js, Nuxt UI, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, and Three.js.",
-      "version": "2.13.0",
+      "description": "Design data and recommendation layer for AI coding assistants. Includes a searchable database of styles, palettes, typography, charts, and UX guidelines for React, Next.js, Astro, Vue, Nuxt.js, Nuxt UI, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, and Three.js, plus generator skills for banners, brand identity, logos, and slides.",
+      "version": "0.1.0",
       "author": {
-        "name": "nextlevelbuilder"
+        "name": "radityasurya"
       },
       "keywords": [
         "ui",

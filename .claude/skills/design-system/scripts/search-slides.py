@@ -15,7 +15,7 @@ from slide_search_core import (
 
 # Force UTF-8 on stdout/stderr: this script prints emoji, which raises
 # UnicodeEncodeError on a Windows console (cp1252). Same guard as
-# src/ui-ux-pro-max/scripts/search.py.
+# .claude/skills/search/scripts/search.py.
 import io
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':

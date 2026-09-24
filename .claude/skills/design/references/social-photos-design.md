@@ -1,6 +1,6 @@
 # Social Photos Design Guide
 
-Design social media images via HTML/CSS rendering + screenshot export. Orchestrates the bundled `ui-ux-pro-max`, `brand`, and `design-system` skills; screenshot export runs through Chrome headless, Playwright, or Puppeteer.
+Design social media images via HTML/CSS rendering + screenshot export. Orchestrates the bundled `search`, `brand`, and `design-system` skills; screenshot export runs through Chrome headless, Playwright, or Puppeteer.
 
 ## Platform Sizes
 
@@ -59,7 +59,7 @@ Use these bundled skills in sequence:
 
 1. **`brand`** — Extract brand colors, fonts, voice from user's project
 2. **`design-system`** — Get design tokens (spacing, typography scale, color palette)
-3. **`ui-ux-pro-max`** — Layout, hierarchy, visual balance; search a different style, palette, or font pairing per concept for design variety.
+3. **`search`** — Layout, hierarchy, visual balance; search a different style, palette, or font pairing per concept for design variety.
 
 For each approved idea + each target size, create an HTML file:
 
