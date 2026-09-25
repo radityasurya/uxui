@@ -11,9 +11,10 @@ Complete HTML structure with navigation, tokens, and Chart.js integration.
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentation Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
     <style>
-        /* Paste embed-tokens.cjs output here */
+        /* uxui:tokens Generator output (tokens.css), inlined here — regenerate,
+           do not hand-edit. Shown values are an example Palette. */
         :root {
             --color-primary: #FF6B6B;
             --color-background: #0D0D0D;
@@ -25,7 +26,7 @@ Complete HTML structure with navigation, tokens, and Chart.js integration.
         body {
             background: var(--color-background);
             color: #fff;
-            font-family: var(--typography-font-body, 'Inter', sans-serif);
+            font-family: var(--font-body);
             overflow: hidden;
         }
 
@@ -80,10 +81,10 @@ Complete HTML structure with navigation, tokens, and Chart.js integration.
         }
 
         /* Typography */
-        h1, h2 { font-family: var(--typography-font-heading, 'Space Grotesk', sans-serif); }
+        h1, h2 { font-family: var(--font-heading); }
         .slide-title {
             font-size: clamp(32px, 6vw, 80px);
-            background: var(--primitive-gradient-primary, linear-gradient(135deg, #FF6B6B, #FF8E53));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
@@ -203,12 +204,20 @@ Complete HTML structure with navigation, tokens, and Chart.js integration.
 
 ## Chart.js Integration
 
+Chart colors come from the inlined uxui:tokens output at runtime, never hex
+literals — the same pattern `scripts/generate.py` emits. Read each Token with
+`getComputedStyle`; appending an alpha suffix to a 6-digit hex Token gives a
+translucent fill.
+
 ```html
 <div class="chart-container" style="width: min(80%, 600px); height: clamp(200px, 40vh, 350px);">
     <canvas id="revenueChart"></canvas>
 </div>
 
 <script>
+const root = getComputedStyle(document.documentElement);
+const tok = (name) => root.getPropertyValue(name).trim();
+
 new Chart(document.getElementById('revenueChart'), {
     type: 'line', // or 'bar', 'doughnut', 'radar'
     data: {
@@ -216,8 +225,8 @@ new Chart(document.getElementById('revenueChart'), {
         datasets: [{
             label: 'MRR ($K)',
             data: [5, 12, 28, 45],
-            borderColor: '#FF6B6B',
-            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+            borderColor: tok('--color-primary'),
+            backgroundColor: tok('--color-primary') + '1A',
             borderWidth: 3,
             fill: true,
             tension: 0.4
@@ -228,8 +237,8 @@ new Chart(document.getElementById('revenueChart'), {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#B8B8D0' } },
-            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#B8B8D0' } }
+            x: { grid: { color: tok('--color-border') }, ticks: { color: tok('--color-muted-foreground') } },
+            y: { grid: { color: tok('--color-border') }, ticks: { color: tok('--color-muted-foreground') } }
         }
     }
 });
@@ -285,11 +294,16 @@ new Chart(document.getElementById('revenueChart'), {
 
 ## CSS Variables Reference
 
+Names follow the uxui:tokens Generator's `tokens.css` (the full set ships
+there); inlining that file defines all of them:
+
 | Variable | Usage |
 |----------|-------|
 | `--color-primary` | Brand primary (CTA, highlights) |
 | `--color-background` | Slide background |
 | `--color-secondary` | Secondary elements |
-| `--primitive-gradient-primary` | Title gradients |
-| `--typography-font-heading` | Headlines |
-| `--typography-font-body` | Body text |
+| `--color-accent` | Badge tints, bullet numbers, title gradients |
+| `--color-border` | Grid lines, card borders |
+| `--color-muted-foreground` | Secondary text, axis ticks |
+| `--font-heading` | Headlines |
+| `--font-body` | Body text |
