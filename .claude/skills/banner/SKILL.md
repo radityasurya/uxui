@@ -23,7 +23,12 @@ Design banners across social, ads, web, and print formats. Generate multiple art
 
 ## Available Resources
 
-This workflow is self-contained: it requires no sibling skills or skill-relative scripts. Use `references/banner-sizes-and-styles.md` for the bundled size, safe-zone, and art-direction guidance. Browser research, image generation, and screenshot tooling are optional capabilities; when unavailable, use supplied assets, CSS-built visuals, and the runtime's standard preview or capture workflow.
+- `data/styles.csv` — the banner Style catalog: 10 Styles with keywords, prompt text, and technical guidance per Style.
+- `scripts/generate.py` — the banner Generator: writes an HTML/CSS banner at exact platform pixel size from a Style, a Palette, a size, and copy.
+- `references/banner-sizes-and-styles.md` — bundled size, safe-zone, and art-direction guidance.
+- Palette names resolve against the sibling search skill's color catalog (`../search/data/colors.csv`); a CSS custom-property file (tokens.css) works too.
+
+Browser research, image generation, and screenshot tooling are optional capabilities; when unavailable, use supplied assets, CSS-built visuals, and the runtime's standard preview or capture workflow.
 
 ## Workflow
 
@@ -47,19 +52,32 @@ Collect via AskUserQuestion:
 
 For each art direction option:
 
-1. **Create the banner in HTML/CSS**
+1. **Generate the banner** — run the Generator from this skill's directory. It writes HTML/CSS at the exact platform pixel size from a Style, a Palette, and the copy:
+   ```
+   python3 scripts/generate.py --style gradient-wash --palette "SaaS (General)" \
+       --size twitter-header --headline "Ship design faster" \
+       --subhead "One search for styles, palettes, and guidelines" \
+       --cta "Start free" -o assets/banners/campaign/gradient-1500x500.html
+   ```
+   - `--style` takes a Style ID from `data/styles.csv` (`--list` prints them all)
+   - `--palette` takes a Palette name from the sibling search skill's color catalog, or a path to a CSS custom-property file (tokens.css)
+   - `--size` takes a platform slug from `references/banner-sizes-and-styles.md` (for example `twitter-header`, `medium-rectangle`) or a literal `WxH`
+   - Generated output already applies the safe-zone padding, type-scale, and 4.5:1 contrast intent of its Style row; verify with real copy
+   - Then run `scripts/render-check.py <file>` from the repository root with `--window-size` set to the banner's exact size to validate and screenshot it
+
+2. **Or hand-author the HTML/CSS** when the art direction needs imagery or a layout the Generator does not cover:
    - Use the exact platform dimensions from the size reference
    - Apply safe-zone rules (critical content in the central 70–80%)
    - Use at most 2 typefaces, a single CTA, and text contrast of at least 4.5:1
    - Apply the user's supplied logo, colors, typography, and imagery; do not invent brand rules
 
-2. **Choose a visual source**
+3. **Choose a visual source** (hand-authored banners)
    - Prefer user-supplied or appropriately licensed assets when provided
    - Use gradients, geometric forms, type, and other CSS-built visuals for a dependency-free result
    - If the runtime provides an authorized image-generation capability, it may generate a background or illustration at the target aspect ratio
    - Keep generated visual prompts free of text, letters, and words so final copy remains editable and accessible in HTML
 
-3. **Compose the final banner** — overlay the headline, supporting copy, CTA, and logo in HTML/CSS, then verify hierarchy, safe zones, contrast, and crop behavior at the exact target size
+4. **Compose the final banner** — overlay the headline, supporting copy, CTA, and logo in HTML/CSS, then verify hierarchy, safe zones, contrast, and crop behavior at the exact target size
 
 ### Step 4: Export Banners to Images
 

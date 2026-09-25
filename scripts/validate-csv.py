@@ -19,6 +19,7 @@ DATA_DIRS = [
     REPO_ROOT / ".claude" / "skills" / "search" / "data",
     REPO_ROOT / ".claude" / "skills" / "brand" / "data",
     REPO_ROOT / ".claude" / "skills" / "icon" / "data",
+    REPO_ROOT / ".claude" / "skills" / "banner" / "data",
 ]
 
 # Every CSV under data/ is a runtime dataset loaded by core.py.
