@@ -1,0 +1,23 @@
+{
+  "name": "uxui",
+  "description": "Design data and recommendation layer for AI coding assistants. Searchable local database with 79 styles, 192 palettes, 74 font pairings, 25 charts, and 22 stacks (React, Next.js, Vue, Nuxt.js, Nuxt UI, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js), plus generator skills for banners, brand identity, logos, and slides. Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization.",
+  "version": "0.1.0",
+  "author": {
+    "name": "radityasurya"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/radityasurya/uxui",
+  "repository": "https://github.com/radityasurya/uxui",
+  "keywords": [
+    "ui",
+    "ux",
+    "design",
+    "styles",
+    "typography",
+    "color-palette",
+    "accessibility",
+    "charts",
+    "components"
+  ],
+  "skills": "./.claude/skills/"
+}
