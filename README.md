@@ -65,6 +65,12 @@ python3 scripts/validate-agent-guide.py
 bash scripts/smoke-domains.sh
 ```
 
+To render-check a Generator's output (`.svg` or `.html`), run
+`python3 scripts/render-check.py <file> [--out <screenshot>]`. It validates
+markup with the Python standard library, renders the file in headless
+Chrome or Chromium, and saves a screenshot. Exit code `2` means no Chrome
+binary was found; install one or set `RENDER_CHECK_CHROME`.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 
 ## Credits

@@ -37,6 +37,9 @@ build/
 .output/
 out/
 
+# Render-check screenshots (scripts/render-check.py default --out)
+*.render-check.png
+
 # Cache
 .cache/
 .parcel-cache/

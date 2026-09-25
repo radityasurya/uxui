@@ -27,4 +27,4 @@ jobs:
         run: pip install pytest
 
       - name: Run skill regression tests
-        run: python3 -m pytest .claude/skills -v
+        run: python3 -m pytest .claude/skills scripts -v
