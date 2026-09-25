@@ -42,6 +42,7 @@ Requires Python 3.x on the machine running the assistant.
 | `brand` | Brand voice, visual identity, messaging frameworks, and brand consistency |
 | `design` | Logo generation, corporate identity programs, social photos, and icon design |
 | `design-system` | Design token architecture, component specs, and slide generation |
+| `image` | Cost-gated Image jobs: one paid OpenRouter image call with a printed cost estimate and confirmation |
 | `slides` | Strategic HTML presentations with Chart.js and design tokens |
 
 ## How the skills fit together
@@ -94,6 +95,11 @@ Some Generators run Image jobs: paid image-generation calls to OpenRouter's
 
 - `UXUI_IMAGE_MODEL` — optional. The default model is GPT Image 2
   (`openai/gpt-image-2` on OpenRouter); set this variable to override it.
+
+Run an Image job through the `image` skill
+(`.claude/skills/image/scripts/image_job.py`). It prints the model, the
+prompt, and an estimated cost, and asks for an explicit confirmation before
+the paid call. Use `--dry-run` to preview the request without sending it.
 
 Provisioning the key value is outside this repository's scope. uxui has no
 runtime server and stores no secrets; it only reads the environment variable.
