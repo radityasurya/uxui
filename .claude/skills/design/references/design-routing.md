@@ -12,7 +12,7 @@ When to use each design sub-skill.
 | logo-design | AI logo generation (55 styles, 30 palettes) | SKILL.md + 4 references + 2 scripts |
 | cip-design | Corporate Identity Program (50 deliverables) | SKILL.md + 3 references + 3 scripts |
 | slides | HTML presentations with Chart.js | SKILL.md + 4 references |
-| banner | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference |
+| banner | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference + 1 script (Generator) |
 | icon-design | SVG icon generation (15 styles, Gemini 3.1 Pro) | SKILL.md + 1 reference + 1 script |
 
 ## Routing by Task Type

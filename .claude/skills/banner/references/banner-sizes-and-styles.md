@@ -1,5 +1,10 @@
 # Banner Sizes & Art Direction Styles Reference
 
+The banner skill's Generator (`../scripts/generate.py`, run from the skill
+directory) turns a Style from `../data/styles.csv`, a Palette, a size slug
+from the tables below, and copy into HTML at the exact pixel size. This file
+remains the size and art-direction reference.
+
 ## Complete Banner Sizes
 
 ### Social Media

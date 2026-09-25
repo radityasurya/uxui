@@ -54,12 +54,12 @@ CHROME_FLAGS = (
     # --no-sandbox: Ubuntu 23.10+ AppArmor blocks the user-namespace sandbox
     # and Chrome aborts at startup; CI containers need it as well.
     "--headless", "--no-sandbox", "--disable-gpu", "--hide-scrollbars",
-    "--window-size=1280,800",
     # Deterministic settle time, so scripts that draw after load (Chart.js)
     # run before the screenshot is taken.
     "--virtual-time-budget=3000",
     "--enable-logging=stderr",
 )
+DEFAULT_WINDOW_SIZE = "1280,800"
 
 VOID_ELEMENTS = frozenset({
     "area", "base", "br", "col", "embed", "hr", "img", "input",
@@ -187,11 +187,13 @@ def console_failures(messages: list[str]) -> list[str]:
     return [m for m in messages if any(marker in m for marker in CONSOLE_ERROR_MARKERS)]
 
 
-def run_render(chrome: str, url: str, out: Path) -> tuple[int, list[str], list[str]]:
+def run_render(chrome: str, url: str, out: Path,
+               window_size: str = DEFAULT_WINDOW_SIZE) -> tuple[int, list[str], list[str]]:
     """Render `url` headlessly. Return (exit status, console messages, log tail)."""
     try:
         proc = subprocess.run(
-            [chrome, *CHROME_FLAGS, f"--screenshot={out}", url],
+            [chrome, *CHROME_FLAGS, f"--window-size={window_size}",
+             f"--screenshot={out}", url],
             capture_output=True, text=True, errors="replace", timeout=90,
         )
     except subprocess.TimeoutExpired:
@@ -232,6 +234,11 @@ def main(argv: list[str] | None = None) -> int:
         "--out", metavar="PATH",
         help="screenshot path (default: <input>.render-check.png)",
     )
+    parser.add_argument(
+        "--window-size", metavar="WxH", default=DEFAULT_WINDOW_SIZE,
+        help="headless viewport for the render (default: %(default)s); "
+             "pass the banner's exact size for an exact-pixel screenshot",
+    )
     args = parser.parse_args(argv)
 
     path = Path(args.file)
@@ -264,7 +271,8 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    code, messages, log_tail = run_render(chrome, path.as_uri(), out)
+    code, messages, log_tail = run_render(
+        chrome, path.as_uri(), out, args.window_size.replace("x", ","))
     failures = console_failures(messages)
     for message in messages:
         kind = "console error" if message in failures else "console"
