@@ -50,6 +50,28 @@ Add `--json` for machine-readable output, `-n <count>` to limit results, and
 `--variance/--motion/--density` (with `--design-system`) to bias the
 recommendation.
 
+## v2: Image jobs
+
+Some Generators run Image jobs: paid image-generation calls to OpenRouter's
+`POST /api/v1/images`. Every Image job reads two environment variables:
+
+- `OPENROUTER_API_KEY` — required. Set it in the environment before the first
+  run. Generators check it at the start of a run and exit with a one-line,
+  actionable error instead of failing later with a bare HTTP 401. To check
+  your environment, run:
+
+  ```bash
+  python3 .claude/skills/image/scripts/openrouter_key.py
+  ```
+
+- `UXUI_IMAGE_MODEL` — optional. The default model is GPT Image 2
+  (`openai/gpt-image-2` on OpenRouter); set this variable to override it.
+
+Provisioning the key value is outside this repository's scope. uxui has no
+runtime server and stores no secrets; it only reads the environment variable.
+Create the key at openrouter.ai, keep it in your own secret store (for example
+a chezmoi-rendered dotfile), and export it before the assistant runs.
+
 ## Development
 
 To check catalog freshness against upstream sources, run
