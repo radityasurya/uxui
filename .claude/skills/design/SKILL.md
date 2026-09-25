@@ -1,6 +1,6 @@
 ---
 name: design
-description: "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini, Atlas Cloud, or MuAPI AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML→screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads."
+description: "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), social photos (HTML→screenshot, multi-platform). Actions: design logo, create CIP, build slides, design banner, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads."
 argument-hint: "[design-type] [context]"
 license: MIT
 metadata:
@@ -17,7 +17,7 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 - Brand identity, voice, assets
 - Design system tokens and specs
 - UI styling with shadcn/ui + Tailwind
-- Logo design and AI generation
+- Logo design
 - Corporate identity program (CIP) deliverables
 - Presentations and pitch decks
 - Banner design for social media, ads, web, print
@@ -30,12 +30,10 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 | Brand identity, voice, assets | `brand` | Bundled sibling skill |
 | Tokens, specs, CSS vars | `design-system` | Bundled sibling skill |
 | shadcn/ui, Tailwind, code | `styling` | Bundled sibling skill |
-| Logo creation, AI generation | Logo (built-in) | `references/logo-design.md` |
 | CIP mockups, deliverables | CIP (built-in) | `references/cip-design.md` |
 | Presentations, pitch decks | Slides (built-in) | `references/slides.md` |
 | Banners, covers, headers | Banner (built-in) | `references/banner-sizes-and-styles.md` |
 | Social media images/photos | Social Photos (built-in) | `references/social-photos-design.md` |
-| SVG icons, icon sets | Icon (built-in) | `references/icon-design.md` |
 
 ## Script Paths
 
@@ -43,8 +41,7 @@ Script paths in this skill and its `references/` are relative to the directory t
 
 ## Logo Design (Built-in)
 
-55+ styles, 30 color palettes, 25 industry guides. Gemini Nano Banana, Atlas
-Cloud, and MuAPI image generation.
+55+ styles, 30 color palettes, 25 industry guides.
 
 ### Logo: Generate Design Brief
 
@@ -60,25 +57,9 @@ python3 scripts/logo/search.py "tech professional" --domain color
 python3 scripts/logo/search.py "healthcare medical" --domain industry
 ```
 
-### Logo: Generate with AI
-
-**ALWAYS** generate output logo images with white background.
-
-```bash
-python3 scripts/logo/generate.py --brand "TechFlow" --style minimalist --industry tech
-python3 scripts/logo/generate.py --prompt "coffee shop vintage badge" --style vintage
-python3 scripts/logo/generate.py --brand "TechFlow" --provider atlas
-python3 scripts/logo/generate.py --brand "TechFlow" --provider muapi
-python3 scripts/logo/generate.py --brand "TechFlow" --provider muapi --muapi-model nano-banana-pro
-```
-
-**IMPORTANT:** When scripts fail, try to fix them directly.
-
-After generation, **ALWAYS** ask user about HTML preview via `AskUserQuestion`. If yes, use the bundled `search` skill for the gallery.
-
 ## CIP Design (Built-in)
 
-50+ deliverables, 20 styles, 20 industries. Gemini Nano Banana (Flash/Pro).
+50+ deliverables, 20 styles, 20 industries.
 
 ### CIP: Generate Brief
 
@@ -94,24 +75,6 @@ python3 scripts/cip/search.py "luxury premium elegant" --domain style
 python3 scripts/cip/search.py "hospitality hotel" --domain industry
 python3 scripts/cip/search.py "office reception" --domain mockup
 ```
-
-### CIP: Generate Mockups
-
-```bash
-# With logo (RECOMMENDED)
-python3 scripts/cip/generate.py --brand "TopGroup" --logo /path/to/logo.png --deliverable "business card" --industry "consulting"
-
-# Full CIP set
-python3 scripts/cip/generate.py --brand "TopGroup" --logo /path/to/logo.png --industry "consulting" --set
-
-# Pro model (4K text)
-python3 scripts/cip/generate.py --brand "TopGroup" --logo logo.png --deliverable "business card" --model pro
-
-# Without logo
-python3 scripts/cip/generate.py --brand "TechFlow" --deliverable "business card" --no-logo-prompt
-```
-
-Models: `flash` (default, `gemini-2.5-flash-image`), `pro` (`gemini-3-pro-image-preview`)
 
 ### CIP: Render HTML Presentation
 
@@ -184,44 +147,6 @@ Load `references/banner-sizes-and-styles.md` for complete sizes and styles refer
 - Text under 20% for ads (Meta penalizes)
 - Print: 300 DPI, CMYK, 3-5mm bleed
 
-## Icon Design (Built-in)
-
-15 styles, 12 categories. Gemini 3.1 Pro Preview generates SVG text output.
-
-### Icon: Generate Single Icon
-
-```bash
-python3 scripts/icon/generate.py --prompt "settings gear" --style outlined
-python3 scripts/icon/generate.py --prompt "shopping cart" --style filled --color "#6366F1"
-python3 scripts/icon/generate.py --name "dashboard" --category navigation --style duotone
-```
-
-### Icon: Generate Batch Variations
-
-```bash
-python3 scripts/icon/generate.py --prompt "cloud upload" --batch 4 --output-dir ./icons
-```
-
-### Icon: Multi-size Export
-
-```bash
-python3 scripts/icon/generate.py --prompt "user profile" --sizes "16,24,32,48" --output-dir ./icons
-```
-
-### Icon: Top Styles
-
-| Style | Best For |
-|-------|----------|
-| outlined | UI interfaces, web apps |
-| filled | Mobile apps, nav bars |
-| duotone | Marketing, landing pages |
-| rounded | Friendly apps, health |
-| sharp | Tech, fintech, enterprise |
-| flat | Material design, Google-style |
-| gradient | Modern brands, SaaS |
-
-**Model:** `gemini-3.1-pro-preview` — text-only output (SVG is XML text). No image generation API needed.
-
 ## Social Photos (Built-in)
 
 Multi-platform social image design: HTML/CSS → screenshot export. Uses the bundled `search`, `brand`, and `design-system` skills; screenshot export runs through Chrome headless, Playwright, or Puppeteer (see the reference).
@@ -252,9 +177,7 @@ Load `references/social-photos-design.md` for sizes, templates, best practices.
 
 ### Complete Brand Package
 
-1. **Logo** → `scripts/logo/generate.py` → Generate logo variants
-2. **CIP** → `scripts/cip/generate.py --logo ...` → Create deliverable mockups
-3. **Presentation** → Load `references/slides-create.md` → Build pitch deck
+1. **Presentation** → Load `references/slides-create.md` → Build pitch deck
 
 ### New Design System
 
@@ -289,13 +212,10 @@ Load `references/social-photos-design.md` for sizes, templates, best practices.
 | Script | Purpose |
 |--------|---------|
 | `scripts/logo/search.py` | Search logo styles, colors, industries |
-| `scripts/logo/generate.py` | Generate logos with Gemini AI |
 | `scripts/logo/core.py` | BM25 search engine for logo data |
 | `scripts/cip/search.py` | Search CIP deliverables, styles, industries |
-| `scripts/cip/generate.py` | Generate CIP mockups with Gemini |
 | `scripts/cip/render-html.py` | Render HTML presentation from CIP mockups |
 | `scripts/cip/core.py` | BM25 search engine for CIP data |
-| `scripts/icon/generate.py` | Generate SVG icons with Gemini 3.1 Pro |
 
 ## Prerequisites
 
@@ -305,27 +225,6 @@ Check if Python is installed:
 ```bash
 python3 --version || python --version
 ```
-
-## Setup
-
-```bash
-export GEMINI_API_KEY="your-key"  # https://aistudio.google.com/apikey
-pip install google-genai pillow
-
-# Optional MuAPI provider (no extra Python package required)
-export MUAPI_API_KEY="your-key"
-```
-
-MuAPI uses the asynchronous model endpoint and prediction result API. See the
-[MuAPI API reference](https://muapi.ai/docs/api-reference) for authentication
-and the [nano-banana model contract](https://api.muapi.ai/api/v1/models/nano-banana)
-or [nano-banana-pro model contract](https://api.muapi.ai/api/v1/models/nano-banana-pro)
-for the current model-specific schemas. The logo generator supports both documented
-model slugs and sends their shared required `prompt` plus optional `aspect_ratio`
-fields; the Pro model also accepts an optional `resolution` field that this focused
-logo workflow leaves at the provider default.
-
-> **Note for Windows:** Use `python` instead of `pip` where needed (e.g., `python -m pip install ...`).
 
 ## Integration
 
