@@ -1,13 +1,13 @@
 # CIP Design Reference
 
-Corporate Identity Program design with 50+ deliverables, 20 styles, 20 industries. Generate mockups with Gemini Nano Banana (Flash/Pro).
+Corporate Identity Program design with 50+ deliverables, 20 styles, 20 industries. Generate mockup bundles through cost-gated Image jobs (`uxui:image`, OpenRouter).
 
 ## Scripts
 
 | Script | Purpose |
 |--------|---------|
 | `scripts/cip/search.py` | Search deliverables, styles, industries; generate CIP briefs |
-| `scripts/cip/generate.py` | Generate CIP mockups with Gemini (Flash/Pro) |
+| `../brand/scripts/cip_bundle.py` | CIP generator bundle: one Image job per deliverable behind one combined cost gate |
 | `scripts/cip/render-html.py` | Render HTML presentation from CIP mockups |
 | `scripts/cip/core.py` | BM25 search engine for CIP data |
 
@@ -35,23 +35,22 @@ python3 scripts/cip/search.py "hospitality hotel" --domain industry
 python3 scripts/cip/search.py "office reception" --domain mockup
 ```
 
-### Generate Mockups
+### Generate Mockup Bundle
+
+One combined cost gate covers all N deliverables: the bundle prints every
+name, prompt, the model, and the total estimated cost, then asks once. A
+decline sends zero requests; `--dry-run` prints the plan with no key and no
+network. See the `brand` skill's SKILL.md for the full cost-gate contract.
 
 ```bash
-# With logo (RECOMMENDED - uses image editing)
-python3 scripts/cip/generate.py --brand "TopGroup" --logo /path/to/logo.png --deliverable "business card" --industry "consulting"
+# Three deliverables, logo described in every prompt
+python3 ../brand/scripts/cip_bundle.py --brand "TopGroup" --industry consulting --deliverables "business card,letterhead,reception signage" --logo logo.svg
 
-# Full CIP set with logo
-python3 scripts/cip/generate.py --brand "TopGroup" --logo /path/to/logo.png --industry "consulting" --set
+# Plan only: all prompts and the total, nothing sent
+python3 ../brand/scripts/cip_bundle.py --brand "GreenLeaf" --industry "food & beverage" --deliverables "product label,folding carton" --dry-run
 
-# Pro model for 4K text rendering
-python3 scripts/cip/generate.py --brand "TopGroup" --logo logo.png --deliverable "business card" --model pro
-
-# Custom deliverables with aspect ratio
-python3 scripts/cip/generate.py --brand "GreenLeaf" --logo logo.png --industry "organic food" --deliverables "letterhead,packaging,vehicle" --ratio 16:9
-
-# Without logo (AI generates interpretation)
-python3 scripts/cip/generate.py --brand "TechFlow" --deliverable "business card" --no-logo-prompt
+# Without a logo (each image invents its own mark; consistency not guaranteed)
+python3 ../brand/scripts/cip_bundle.py --brand "TechFlow" --industry technology --deliverables "business card"
 ```
 
 ### Render HTML Presentation
@@ -63,8 +62,9 @@ python3 scripts/cip/render-html.py --brand "TopGroup" --industry "consulting" --
 
 ## Models
 
-- `flash` (default): `gemini-2.5-flash-image` - Fast, cost-effective
-- `pro`: `gemini-3-pro-image-preview` - Quality, 4K text rendering
+- `openai/gpt-image-2` (default): OpenRouter images endpoint via `uxui:image`
+- Override with `UXUI_IMAGE_MODEL`; models without a price row print
+  "unknown model: cost unknown" and still require confirmation
 
 ## Deliverable Categories
 
@@ -102,10 +102,12 @@ python3 scripts/cip/render-html.py --brand "TopGroup" --industry "consulting" --
 ## Workflow
 
 1. Generate CIP brief → `scripts/cip/search.py --cip-brief`
-2. Generate mockups with logo → `scripts/cip/generate.py --brand --logo --industry --set`
+2. Generate mockup bundle → `../brand/scripts/cip_bundle.py --brand --industry --deliverables [--logo]`
 3. Render HTML presentation → `scripts/cip/render-html.py --brand --industry --images`
 
-**Tip:** If no logo exists, use Logo Design (built-in) to generate one first.
+**Tip:** If no logo exists, generate one first with the `brand` skill's
+`scripts/generate.py` (a local SVG; the bundle reads its `<title>` as the
+logo description for every prompt).
 
 ## Detailed References
 
@@ -116,6 +118,5 @@ python3 scripts/cip/render-html.py --brand "TopGroup" --industry "consulting" --
 ## Setup
 
 ```bash
-export GEMINI_API_KEY="your-key"
-pip install google-genai pillow
+export OPENROUTER_API_KEY="your-key"   # required before the first Image job
 ```

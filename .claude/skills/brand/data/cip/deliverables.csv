@@ -1,0 +1,51 @@
+No,Deliverable,Category,Description,Mockup Context,Size,Prompt Notes
+1,Business Card,Stationery,a stack of business cards with name and contact details,Marble Desk,1536x1024,thick cotton paper with a blind-deboss logomark and one accent edge
+2,Letterhead,Stationery,an A4 letterhead sheet with a masthead,Oak Worktable,1536x1024,uncoated wove paper with the logomark top left and a footer rule
+3,Envelope,Stationery,a DL envelope with a centered logomark,Linen Flat Lay,1536x1024,matching paper with a tinted liner visible at the flap
+4,Compliments Slip,Stationery,a small compliments slip with a short greeting,Marble Desk,1536x1024,same stock as the letterhead with a single accent rule
+5,Notecard,Stationery,a folded notecard with a blank interior,Cafe Table,1024x1024,soft-white card with a narrow logomark band on the front
+6,Presentation Folder,Stationery,an A4 pocket folder for proposals,Glass Office,1536x1024,heavy board with a die-cut logomark window and one pocket
+7,Notebook,Stationery,a hardcover notebook with a ribbon marker,Oak Worktable,1024x1024,blind-embossed logomark on the cover with an elastic band
+8,Pen,Stationery,a machined metal pen,Dark Studio,1024x1024,anodized barrel with a laser-engraved logomark
+9,Sticker Sheet,Stationery,a die-cut sticker sheet of brand marks,Kraft Paper Backdrop,1024x1024,matte vinyl shapes at several scales with one foil accent
+10,Rubber Stamp,Stationery,a wooden-handled rubber stamp,Workshop Bench,1024x1024,turned beech handle with the logomark on the base
+11,Reception Signage,Signage,a reception wall sign with dimensional letters,Reception Lobby,1536x1024,brushed metal letters with standoff mounts and uplighting
+12,Wayfinding System,Signage,a family of directional signs with room labels,Glass Office,1536x1024,frosted acrylic panels with pictograms and tactile lettering
+13,Meeting Room Sign,Signage,a meeting room sign beside a glass door,Glass Office,1024x1024,solid-surface plate with a paper-insert slot and small logomark
+14,Storefront Sign,Signage,an illuminated fascia sign above a shop entrance,Storefront,1536x1024,halo-lit lettering on a dark fascia with warm evening glow
+15,Building Facade Sign,Signage,a large logomark mounted on a building facade,City Street,1536x1024,powder-coated steel letters that read clearly at a distance
+16,Exhibition Booth,Signage,a trade show booth with a tall logomark wall,Trade Show Floor,1536x1024,fabric graphics with spotlit counters and clean cable runs
+17,Window Decals,Signage,frosted window decals with a logomark pattern,Storefront,1024x1024,etch-effect film in two densities with a clear sightline band
+18,ID Card,Access,an employee ID card with a photo slot,Studio Seamless White,1024x1024,matte card with a color-coded edge stripe and clip hole
+19,Lanyard,Access,a printed lanyard holding a badge,Trade Show Floor,1024x1024,woven polyester with a repeated logomark and metal clasp
+20,Polo Shirt,Apparel,a pique polo shirt with a chest logomark,Studio Seamless White,1024x1024,tonal embroidery on the left chest with matching buttons
+21,T-Shirt,Apparel,a t-shirt with a chest logomark print,Studio Seamless White,1024x1024,soft-hand screen print with the logomark centered on the chest
+22,Cap,Apparel,a six-panel cap with a front logomark,Studio Seamless White,1024x1024,flat embroidery on brushed cotton twill
+23,Softshell Jacket,Apparel,a softshell jacket with a sleeve logomark,Grey Gradient,1024x1024,tonal heat-transfer logomark on the left sleeve and a branded zipper pull
+24,Apron,Apparel,a waist apron with a stitched logomark,Cafe Table,1024x1024,heavy denim with contrast stitching and a utility pocket
+25,Coffee Mug,Merch,a ceramic mug with a wrap print,Cafe Table,1024x1024,gloss glaze with the logomark wrapping both sides
+26,Water Bottle,Merch,an insulated water bottle with a vertical logomark,Grey Gradient,1024x1024,matte powder coating with a silicone loop lid
+27,Tote Bag,Merch,a canvas tote bag with a one-color print,City Street,1024x1024,heavy natural canvas with long handles and a centered logomark
+28,Gift Box,Merch,a rigid gift box with a foil-stamped lid,Dark Studio,1024x1024,deep-tone board with a foil logomark and grosgrain ribbon
+29,Shopping Bag,Merch,a paper shopping bag with twisted handles,Retail Shelf,1024x1024,ribbed kraft paper with a two-tone logomark print
+30,Umbrella,Merch,a stick umbrella with a repeated logomark pattern,City Street,1024x1024,double canopy print with a curved wooden handle
+31,Email Signature,Digital,an email signature block with a logomark and contact lines,Desktop Screen,1536x1024,crisp small logomark with tidy stacked contact details
+32,Social Profile Header,Digital,a social profile header banner at platform size,Desktop Screen,1536x1024,wide crop of the palette with the logomark placed off-center
+33,Social Post Template,Digital,a feed post template with a headline zone,Phone in Hand,1024x1024,bold headline area with a consistent logomark corner
+34,Presentation Title Slide,Digital,a presentation title slide with a logomark,Meeting Projector,1536x1024,full-bleed palette background with restrained title type
+35,Document Template,Digital,a report cover page with a title block,Desktop Screen,1536x1024,cover grid with a thin rule and a logomark anchor
+36,Invoice,Print,a printed invoice on branded letterhead,Marble Desk,1024x1536,aligned figures in a clean table with a payment footer
+37,Website Hero,Digital,a landing page hero with a headline and logomark,Desktop Screen,1536x1024,palette gradient with a single call-to-action button
+38,Product Label,Packaging,a product label with name and details,Retail Shelf,1024x1024,front label on paper stock with batch details in small type
+39,Folding Carton,Packaging,a folding carton with a logomark panel,Studio Seamless White,1024x1024,soft-touch coating with one accent panel and crisp folds
+40,Stand-Up Pouch,Packaging,a stand-up pouch with a bold band,Retail Shelf,1024x1024,matte film with a clear window and strong shelf presence
+41,Packing Tape,Packaging,branded packing tape on a sealed box,Kraft Paper Backdrop,1024x1024,repeating logomark strip in one ink on kraft
+42,Wrapping Paper,Packaging,gift wrap with a repeating logomark pattern,Linen Flat Lay,1024x1024,two-tone pattern sheet with generous negative space
+43,Brochure,Print,a tri-fold brochure opened flat,Oak Worktable,1536x1024,three panels with a clear reading order and one full-bleed photo
+44,Poster,Print,an A2 poster pinned at eye level,City Street,1024x1536,large headline type with a small logomark footer
+45,Flyer,Print,an A5 promotional flyer,Cafe Table,1024x1024,uncoated leaflet with a tear-off strip
+46,Roll-Up Banner,Print,a roll-up banner standing on a show floor,Trade Show Floor,1024x1536,vertical layout with the logomark high and a contact strip low
+47,Car Branding,Vehicle,a sedan with door and hood logomarks,Moving Vehicle,1536x1024,cut-vinyl logomarks on the doors with a pinstripe accent
+48,Van Branding,Vehicle,a panel van with a partial wrap,Moving Vehicle,1536x1024,full-height side panel with the logomark and a short value line
+49,Truck Branding,Vehicle,a box truck with a full wrap,Moving Vehicle,1536x1024,two-logomark sides with reflective safety accents
+50,Brand Guidelines Booklet,Print,a saddle-stitched brand guidelines booklet,Oak Worktable,1024x1024,slim booklet with palette swatches and type specimens

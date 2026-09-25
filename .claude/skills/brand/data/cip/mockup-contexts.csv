@@ -1,0 +1,23 @@
+No,Context Name,Category,Scene,Lighting,Camera,Props,Prompt Modifiers
+1,Marble Desk,Stationery,brand collateral arranged on a white marble desk,soft window daylight from the left,45-degree overhead angle,a fountain pen and a leather notebook,photorealistic soft shadows premium
+2,Oak Worktable,Stationery,stationery laid out on a warm oak worktable,quiet morning light,flat lay from directly above,a ceramic coffee cup and reading glasses,"warm natural textures, natural-light photography"
+3,Concrete Slab,Industrial,collateral on a raw concrete slab,hard directional light from one side,top-down view,a single geometric paperweight,"high contrast industrial minimal, studio photography"
+4,Dark Studio,Premium,a single object floating against a deep charcoal field,dramatic rim light,centered product view,none,moody luxury rim-lit
+5,Linen Flat Lay,Soft,items on washed natural linen,diffused daylight,straight overhead,a sprig of dried eucalyptus,"tactile fabric texture, soft daylight photography"
+6,Reception Lobby,Environment,a reception wall behind a low desk,warm architectural lighting,eye-level wide shot,a desk lamp and fresh flowers,spacious architectural photography
+7,Glass Office,Environment,an open office with glass partitions,cool even daylight,three-quarter view,neat cabling and planters,"clean corporate interior, architectural photography"
+8,City Street,Outdoor,the brand item out on a quiet city street,overcast soft light,three-quarter front view,blurred passers-by,urban context shallow depth of field
+9,Storefront,Outdoor,a shop facade at dusk,warm interior glow against blue hour,straight-on view,hanging sign bracket,"inviting evening ambience, exterior photography"
+10,Trade Show Floor,Event,an exhibition booth on a busy show floor,cool spotlights over warm aisles,wide angle at eye level,lanyards and counter displays,"event energy, professional event photography"
+11,Retail Shelf,Retail,a shelf display among neighboring products,bright even shop light,straight-on close view,price tags and shelf trim,"merchandising context, retail photography"
+12,Kraft Paper Backdrop,Neutral,items on seamless kraft paper,warm softbox light,straight-on view,none,"craft warmth matte finish, still-life photography"
+13,Studio Seamless White,Neutral,items on a white seamless studio sweep,even soft light with a gentle gradient,straight-on view,none,catalog product shot clean background
+14,Grey Gradient,Neutral,items against a grey studio gradient,soft top light with falloff,slight three-quarter view,none,"modern minimal neutral, studio product photography"
+15,Cafe Table,Lifestyle,a marble cafe table by a window,natural side light,close 45-degree angle,a pastry and a small vase,"lifestyle warmth, lifestyle photography"
+16,Roof Terrace,Lifestyle,a roof terrace with planters,golden hour sun,eye-level view,railing and planted herbs,golden hour glow
+17,Workshop Bench,Craft,a workbench with hand tools,focused task lighting,close angled view,calipers and wood shavings,"hands-on craft context, close-up photography"
+18,Moving Vehicle,Outdoor,a vehicle on an open road,low sun from the front quarter,panning side view,distant horizon,motion-blurred background crisp subject
+19,Desktop Screen,Digital,a monitor on a tidy desk,screen glow mixed with daylight,straight-on view,keyboard and a notebook,interface in context sharp pixels
+20,Printer Sheet,Print,a stack of fresh sheets beside a press,neutral print-shop light,top-down view,ink swatch card,"print production feel, print-shop photography"
+21,Phone in Hand,Digital,a smartphone held in one hand with the screen facing the camera,soft indoor light mixed with screen glow,straight-on close view,none,social feed context sharp pixels
+22,Meeting Projector,Digital,a slide projected onto a screen in a dim meeting room,dim room with projector glow,straight-on view of the screen,a clicker on the table,presentation context crisp projection
