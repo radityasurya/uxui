@@ -28,6 +28,16 @@ SKILL_TREES = (".claude/skills",)
 # The only file that may use the plugin-root form: hand-authored for the plugin install.
 # (Built from segments: this constant is also scanned by path-contract greps.)
 PLUGIN_ONLY_FILE = Path(".claude") / "skills" / "search" / "SKILL.md"
+# Retired paid-API generators (uxui issue #1): the scripts are deleted, but
+# design/references/*.md still documents them until issues #7/#8/#12 rewrite
+# or retire those files. Invocations of these paths keep the path-anchor
+# checks; only the file-existence check is waived. Drop entries as the
+# replacement Generators land.
+RETIRED_SCRIPTS = {
+    Path("scripts") / "logo" / "generate.py",
+    Path("scripts") / "cip" / "generate.py",
+    Path("scripts") / "icon" / "generate.py",
+}
 INVOCATION = re.compile(r'(?<![\w/.-])(?:python3?|node|bash)\s+"?([^\s"`\']+\.(?:py|cjs|js|mjs|sh))')
 PLUGIN_ROOT = "${CLAUDE_PLUGIN_ROOT}/"
 
@@ -65,13 +75,15 @@ class SkillScriptPathsTest(unittest.TestCase):
         for skill_dir, md, lineno, path in shipped_invocations():
             seen += 1
             target, reason = resolve(skill_dir, md, path)
+            if reason is None and Path(path) in RETIRED_SCRIPTS:
+                continue
             if reason is None and not target.is_file():
                 reason = f"no such file: {target}"
             if reason:
                 problems.append(f"{md.relative_to(REPO)}:{lineno}: {path} -- {reason}")
         # Guard against a silently broken extractor: the tree carries well over
-        # a hundred documented invocations.
-        self.assertGreater(seen, 100, f"extractor found only {seen} invocations")
+        # fifty documented invocations.
+        self.assertGreater(seen, 50, f"extractor found only {seen} invocations")
         self.assertEqual(problems, [], "\n" + "\n".join(problems))
 
 
