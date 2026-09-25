@@ -1,10 +1,10 @@
 ---
 name: slides
-description: Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.
+description: Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. Includes a Generator that writes a deck HTML file from a Design system's Tokens and a slide-content JSON.
 argument-hint: "[topic] [slide-count]"
 metadata:
   author: claudekit
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Slides
@@ -17,6 +17,34 @@ Strategic HTML presentation design with data visualization.
 - Data-driven slides with Chart.js
 - Strategic slide design with layout patterns
 - Copywriting-optimized presentation content
+
+## Generator
+
+`scripts/generate.py` writes one deck HTML file from a Design system's Tokens
+plus a slide-content JSON. Every color and font reads the inlined `tokens.css`
+written by the uxui:tokens Generator, and every chart slide draws a real
+Chart.js canvas (v4 from a CDN; pass `--chartjs <file>` for a vendored,
+offline build). Chart types resolve against
+`../design-system/data/slide-charts.csv`.
+
+Chain the three Generators, run from this skill's directory:
+
+```bash
+# 1. Search: one Design system as JSON
+python3 ../search/scripts/search.py "SaaS analytics" --design-system --json -p "Acme" > design-system.json
+
+# 2. Tokens: write tokens/tokens.css (sibling tokens.json supplies the fonts link)
+python3 ../tokens/scripts/generate.py --design-system design-system.json --out tokens/
+
+# 3. Slides: write the deck
+python3 scripts/generate.py --slides deck.json --tokens tokens/tokens.css --out deck.html
+```
+
+Author `deck.json` with the slide types documented in `references/create.md`
+(`title`, `content`, `chart`, `closing`). Then run the repository-level checker
+`scripts/render-check.py <file>` from the repository root: it screenshots the
+deck headlessly, fails on console errors, and is how you confirm the Chart.js
+canvases drew.
 
 ## Subcommands
 
