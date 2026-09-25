@@ -29,12 +29,11 @@ SKILL_TREES = (".claude/skills",)
 # (Built from segments: this constant is also scanned by path-contract greps.)
 PLUGIN_ONLY_FILE = Path(".claude") / "skills" / "search" / "SKILL.md"
 # Retired paid-API generators (uxui issue #1): the scripts are deleted, but
-# design/references/*.md still documents them until issues #7/#8/#12 rewrite
-# or retire those files. Invocations of these paths keep the path-anchor
+# design/references/*.md still documents them until issues #7/#12 rewrite or
+# retire those files. Invocations of these paths keep the path-anchor
 # checks; only the file-existence check is waived. Drop entries as the
 # replacement Generators land.
 RETIRED_SCRIPTS = {
-    Path("scripts") / "logo" / "generate.py",
     Path("scripts") / "cip" / "generate.py",
     Path("scripts") / "icon" / "generate.py",
 }

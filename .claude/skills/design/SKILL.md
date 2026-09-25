@@ -28,6 +28,7 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 | Task | Sub-skill | Details |
 |------|-----------|---------|
 | Brand identity, voice, assets | `brand` | Bundled sibling skill |
+| Logo creation, generation | `brand` | Bundled sibling skill |
 | Tokens, specs, CSS vars | `design-system` | Bundled sibling skill |
 | shadcn/ui, Tailwind, code | `styling` | Bundled sibling skill |
 | CIP mockups, deliverables | CIP (built-in) | `references/cip-design.md` |

@@ -1,13 +1,13 @@
 # Logo Design Reference
 
-AI-powered logo design with 55+ styles, 30 color palettes, 25 industry guides. Gemini Nano Banana is the default provider; Atlas Cloud and MuAPI are also available as explicit opt-in providers.
+Logo design with 55+ searchable styles, 30 color palettes, 25 industry guides, and a local SVG Generator. The Generator needs no API keys and no network: it composes the logo from the Style and Palette catalogs on disk.
 
 ## Scripts
 
 | Script | Purpose |
 |--------|---------|
 | `scripts/logo/search.py` | Search styles, colors, industries; generate design briefs |
-| `scripts/logo/generate.py` | Generate logos with Gemini Nano Banana, Atlas Cloud, or MuAPI |
+| `../brand/scripts/generate.py` | Compose an SVG logo locally from a Style, a Palette, and a brand name |
 | `scripts/logo/core.py` | BM25 search engine for logo data |
 
 ## Commands
@@ -33,17 +33,15 @@ python3 scripts/logo/search.py "healthcare medical" --domain industry
 
 ### Generate Logo
 
-**ALWAYS** use white background for output logos.
+The brand skill's Generator composes an SVG logo from a Style, a Palette, and a brand name. The Palette is a name from the color catalog or a `tokens.css` path. The brand name stays live `<text>` on a system font stack, so the SVG renders with no external fonts.
 
 ```bash
-python3 scripts/logo/generate.py --brand "TechFlow" --style minimalist --industry tech
-python3 scripts/logo/generate.py --prompt "coffee shop vintage badge" --style vintage
-python3 scripts/logo/generate.py --brand "TechFlow" --provider atlas
-python3 scripts/logo/generate.py --brand "TechFlow" --provider muapi
-python3 scripts/logo/generate.py --brand "TechFlow" --provider muapi --muapi-model nano-banana-pro
+python3 ../brand/scripts/generate.py --name "TechFlow" --style Minimalist --palette "Classic Blue Trust"
+python3 ../brand/scripts/generate.py --name "Ironwood Coffee" --style "Vintage Badge" --palette "Coffee Brew" --tagline "Est. 2026"
+python3 ../brand/scripts/generate.py --name "TechFlow" --style Gradient --palette assets/design-tokens.css
 ```
 
-Options: `--style`, `--industry`, `--prompt`, `--provider`, `--atlas-model`, `--muapi-model`
+Options: `--name`, `--style`, `--palette` (Palette name or `tokens.css` path), `--tagline`, `--out`, `--list`
 
 ## Available Styles
 
@@ -77,7 +75,7 @@ Options: `--style`, `--industry`, `--prompt`, `--provider`, `--atlas-model`, `--
 ## Workflow
 
 1. Generate design brief → `scripts/logo/search.py --design-brief`
-2. Generate logo variations → `scripts/logo/generate.py --brand --style --industry`
+2. Generate logo variations → `../brand/scripts/generate.py --name --style --palette`
 3. Ask user about HTML preview → `AskUserQuestion` tool
 4. If yes, use the bundled `search` skill for the HTML gallery
 
@@ -86,25 +84,3 @@ Options: `--style`, `--industry`, `--prompt`, `--provider`, `--atlas-model`, `--
 - `references/logo-style-guide.md` - Detailed style descriptions
 - `references/logo-color-psychology.md` - Color meanings and combinations
 - `references/logo-prompt-engineering.md` - AI generation prompts
-
-## Setup
-
-```bash
-export GEMINI_API_KEY="your-key"
-pip install google-genai
-
-# Optional Atlas Cloud provider (no extra Python package required)
-export ATLASCLOUD_API_KEY="your-key"
-
-# Optional MuAPI provider (no extra Python package required)
-export MUAPI_API_KEY="your-key"
-```
-
-MuAPI uses the asynchronous model endpoint and prediction result API. See the
-[MuAPI API reference](https://muapi.ai/docs/api-reference) for authentication
-and the [nano-banana model contract](https://api.muapi.ai/api/v1/models/nano-banana)
-or [nano-banana-pro model contract](https://api.muapi.ai/api/v1/models/nano-banana-pro)
-for the current model-specific schemas. The logo generator supports both documented
-model slugs and sends their shared required `prompt` plus optional `aspect_ratio`
-fields; the Pro model also accepts an optional `resolution` field that this focused
-logo workflow leaves at the provider default.
