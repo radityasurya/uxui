@@ -59,7 +59,7 @@ When to use each design sub-skill.
 
 - Generate CIP deliverables (business cards, letterheads, signage, vehicles, apparel)
 - Create CIP briefs with industry/style analysis
-- Generate mockups with/without logo (Gemini Flash/Pro)
+- Generate mockup bundles through cost-gated Image jobs (brand CIP bundle, with or without a logo)
 - Render HTML presentations from CIP mockups
 
 ### Presentation Tasks

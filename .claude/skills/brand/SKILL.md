@@ -1,6 +1,6 @@
 ---
 name: brand
-description: Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.
+description: Brand voice, visual identity, messaging frameworks, asset management, brand consistency, corporate identity program mockup bundles. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides, CIP deliverables.
 argument-hint: "[update|review|create] [args]"
 metadata:
   author: claudekit
@@ -20,6 +20,7 @@ Brand identity, voice, messaging, asset management, and consistency frameworks.
 - Asset organization, naming, and approval
 - Color palette management and typography specs
 - Logo generation: a local SVG logo from a Style and a Palette
+- CIP mockup bundles: business cards, signage, apparel, and other deliverables as cost-gated Image jobs
 
 ## Script Paths
 
@@ -53,6 +54,52 @@ The Style comes from `data/logo/styles.csv`; the Palette is a name from
 `data/logo/colors.csv` or a `tokens.css` path. The brand name stays live
 `<text>` on a system font stack, so the SVG needs no external fonts. Run with
 `--list` to print every Style and Palette name.
+
+## CIP mockup bundle
+
+One brand plus its Design system fans out into N corporate identity program
+(CIP) deliverables — each one Image job through the bundled `uxui:image`
+skill (`../image/scripts/image_job.py`), so the cost gate covers every
+deliverable.
+
+```bash
+python3 scripts/cip_bundle.py --brand "Northbeam" --industry Consulting \
+  --deliverables "business card,letterhead,reception signage" \
+  [--logo northbeam-logo.svg] [--palette "#123B5A #C9A227"] [--typography "..."] \
+  [--mockup "Marble Desk"] [--out-dir northbeam-cip] [--dry-run]
+```
+
+Run with `--list` to print every Deliverable, Industry, and mockup-context
+name. The industry row supplies the default Design system (Style, Palette,
+Font pairing); `--palette` and `--typography` override it.
+
+**Cost gate — one combined confirmation.** The bundle prints every
+deliverable name, its prompt, the model, the per-image estimate, and the
+total estimated cost for all N, then asks **once**; a `y` runs all N Image
+jobs, a decline sends zero requests. `--yes` skips the single prompt.
+Per-call confirmation was rejected: N interactive stops for a full bundle
+buys no additional protection, since the totals are printed up front.
+`--dry-run` prints the same plan with no key and no network. A failed job
+stops the bundle and lists which deliverables were already saved and paid
+for — spend never continues silently.
+
+**Logo.** `--logo` takes the SVG this skill's `scripts/generate.py` writes;
+its `<title>` (or `--logo-notes`) becomes a text description in every
+prompt. OpenRouter's images endpoint does accept reference images for
+image-to-image (`input_references`, per
+<https://openrouter.ai/docs/api/api-reference/images/generate-an-image>),
+but `uxui:image`'s `run_image_job()` sends `{model, prompt, size}` only, so
+the logo travels as a description — never as bytes. Without `--logo`, each
+prompt asks for a simple mark plus the wordmark, so logo consistency across
+the N images is not guaranteed — generate an SVG with `scripts/generate.py`
+and pass `--logo`.
+
+**Contact sheet.** The design skill's renderer turns a finished output
+directory into an HTML presentation:
+
+```bash
+python3 ../design/scripts/cip/render-html.py --brand "Northbeam" --industry "consulting" --images northbeam-cip
+```
 
 ## Brand Sync Workflow
 
@@ -106,6 +153,7 @@ intentional, re-run with `--force`.
 | `scripts/validate-asset.cjs` | Validate asset naming, size, format |
 | `scripts/extract-colors.cjs` | Extract and compare colors against palette |
 | `scripts/generate.py` | Compose an SVG logo from a Style, a Palette, and a brand name |
+| `scripts/cip_bundle.py` | Fan one brand and its Design system out into N cost-gated CIP mockup Image jobs |
 
 ## Templates
 

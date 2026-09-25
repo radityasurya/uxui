@@ -32,7 +32,7 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 | Tokens, specs, CSS vars | `design-system` | Bundled sibling skill |
 | shadcn/ui, Tailwind, code | `styling` | Bundled sibling skill |
 | SVG icons, icon sets | `icon` | Bundled sibling skill |
-| CIP mockups, deliverables | CIP (built-in) | `references/cip-design.md` |
+| CIP mockups, deliverables | `brand` (CIP generator bundle) | `../brand/scripts/cip_bundle.py`, one Image job per deliverable behind one combined cost gate |
 | Presentations, pitch decks | Slides (built-in) | `references/slides.md` |
 | Banners, covers, headers | Banner (built-in) | `references/banner-sizes-and-styles.md` |
 | Social media images/photos | Social Photos (built-in) | `references/social-photos-design.md` |
@@ -82,6 +82,16 @@ python3 scripts/cip/search.py "office reception" --domain mockup
 
 ```bash
 python3 scripts/cip/render-html.py --brand "TopGroup" --industry "consulting" --images /path/to/cip-output
+```
+
+### CIP: Generate Mockup Bundle
+
+The mockups themselves are Image jobs through the bundled `uxui:image`
+skill, run as a generator bundle from the sibling `brand` skill (one
+combined cost confirmation covers all N deliverables):
+
+```bash
+python3 ../brand/scripts/cip_bundle.py --brand "TopGroup" --industry consulting --deliverables "business card,letterhead,reception signage" --logo logo.svg
 ```
 
 **Tip:** If no logo exists, use Logo Design section above first.
