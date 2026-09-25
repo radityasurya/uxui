@@ -12,11 +12,22 @@ BM25 ranking with regex matching, in pure Python with no dependencies.
 
 ## Install
 
-uxui is a plugin for Claude Code and Codex:
+One plugin, two install paths. Claude Code reads `.claude-plugin/plugin.json`
+and Codex reads `.codex-plugin/plugin.json`; both point at the same
+`.claude/skills/` folder, so there is one copy of the data and generator code.
+
+Claude Code (inside a session):
 
 ```
 /plugin marketplace add radityasurya/uxui
 /plugin install uxui@uxui
+```
+
+Codex CLI:
+
+```
+codex plugin marketplace add radityasurya/uxui
+codex plugin add uxui@uxui
 ```
 
 Requires Python 3.x on the machine running the assistant.
