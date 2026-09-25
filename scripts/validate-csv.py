@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate uxui CSV data files.
 
-Checks every CSV under .claude/skills/search/data for structural issues that
+Checks every CSV under each directory in DATA_DIRS for structural issues that
 csv.DictReader otherwise accepts silently:
 - duplicate or blank header names
 - rows with too many fields (unquoted commas)
@@ -15,7 +15,10 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = REPO_ROOT / ".claude" / "skills" / "search" / "data"
+DATA_DIRS = [
+    REPO_ROOT / ".claude" / "skills" / "search" / "data",
+    REPO_ROOT / ".claude" / "skills" / "brand" / "data",
+]
 
 # Every CSV under data/ is a runtime dataset loaded by core.py.
 # (Former reference-only notes design.csv/draft.csv were removed: they were
@@ -62,17 +65,19 @@ def validate_file(path: Path) -> list[str]:
 
 
 def main() -> int:
-    if not DATA_DIR.exists():
-        print(f"CSV data directory not found: {DATA_DIR}", file=sys.stderr)
-        return 2
+    for data_dir in DATA_DIRS:
+        if not data_dir.exists():
+            print(f"CSV data directory not found: {data_dir}", file=sys.stderr)
+            return 2
 
     errors: list[str] = []
     checked = 0
-    for path in sorted(DATA_DIR.rglob("*.csv")):
-        if path in REFERENCE_ONLY:
-            continue
-        checked += 1
-        errors.extend(validate_file(path))
+    for data_dir in DATA_DIRS:
+        for path in sorted(data_dir.rglob("*.csv")):
+            if path in REFERENCE_ONLY:
+                continue
+            checked += 1
+            errors.extend(validate_file(path))
 
     if errors:
         print("CSV validation failed:", file=sys.stderr)

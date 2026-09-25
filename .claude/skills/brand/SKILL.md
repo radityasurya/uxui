@@ -19,6 +19,7 @@ Brand identity, voice, messaging, asset management, and consistency frameworks.
 - Brand consistency review and audit
 - Asset organization, naming, and approval
 - Color palette management and typography specs
+- Logo generation: a local SVG logo from a Style and a Palette
 
 ## Script Paths
 
@@ -42,6 +43,16 @@ node scripts/validate-asset.cjs <asset-path>
 node scripts/extract-colors.cjs --palette
 node scripts/extract-colors.cjs <image-path>
 ```
+
+**Generate an SVG logo:**
+```bash
+python3 scripts/generate.py --name "Northwind" --style Minimalist --palette "Classic Blue Trust" --tagline "Freight that arrives early"
+```
+
+The Style comes from `data/logo/styles.csv`; the Palette is a name from
+`data/logo/colors.csv` or a `tokens.css` path. The brand name stays live
+`<text>` on a system font stack, so the SVG needs no external fonts. Run with
+`--list` to print every Style and Palette name.
 
 ## Brand Sync Workflow
 
@@ -94,6 +105,7 @@ intentional, re-run with `--force`.
 | `scripts/sync-brand-to-tokens.cjs` | Sync brand-guidelines.md → design-tokens.json/css |
 | `scripts/validate-asset.cjs` | Validate asset naming, size, format |
 | `scripts/extract-colors.cjs` | Extract and compare colors against palette |
+| `scripts/generate.py` | Compose an SVG logo from a Style, a Palette, and a brand name |
 
 ## Templates
 
