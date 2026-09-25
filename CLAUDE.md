@@ -54,6 +54,7 @@ Available stacks: `html-tailwind` (default), `react`, `nextjs`, `astro`, `vue`, 
 ├── styling/                       # UI styling skill (Apache-2.0 — see its LICENSE.txt)
 ├── banner/                        # Banner design skill
 ├── brand/                         # Brand identity skill
+├── icon/                          # SVG icon Generator skill
 ├── design/                        # Logo/CIP/social-photos generator skill
 ├── design-system/                 # Token architecture + slides skill
 └── slides/                        # HTML presentation skill

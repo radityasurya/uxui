@@ -35,7 +35,6 @@ PLUGIN_ONLY_FILE = Path(".claude") / "skills" / "search" / "SKILL.md"
 # replacement Generators land.
 RETIRED_SCRIPTS = {
     Path("scripts") / "cip" / "generate.py",
-    Path("scripts") / "icon" / "generate.py",
 }
 INVOCATION = re.compile(r'(?<![\w/.-])(?:python3?|node|bash)\s+"?([^\s"`\']+\.(?:py|cjs|js|mjs|sh))')
 PLUGIN_ROOT = "${CLAUDE_PLUGIN_ROOT}/"
