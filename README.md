@@ -33,6 +33,23 @@ Requires Python 3.x on the machine running the assistant.
 | `design-system` | Design token architecture, component specs, and slide generation |
 | `slides` | Strategic HTML presentations with Chart.js and design tokens |
 
+## How the skills fit together
+
+Start with `search`: it recommends a Design system for your Product type. `tokens` turns
+that Design system into Tokens. The other Generators — `slides`, `banner`, `icon`, and
+the logo Generator in `brand` — turn Tokens or a Design system into an output file.
+`styling` does not generate a file; it turns Tokens into working UI code. `brand` does
+both: the logo Generator creates logos, and `brand` keeps voice and visual identity
+consistent once assets exist.
+
+| Group | Skills | What the group does |
+|---|---|---|
+| Decide and generate | `search`, `tokens`, `slides`, `banner`, `icon`, `design-system`, `design` | Recommend a Design system, produce Tokens, or write an output file |
+| Apply with taste | `styling`, `brand` | Turn that output into working UI code; the logo Generator in `brand` creates logos, and `brand` keeps voice and visual identity consistent |
+
+For the exact meaning of Design system, Tokens, Generator, Style, Palette, and the other
+domain terms, see [CONTEXT.md](CONTEXT.md). It is the glossary of record.
+
 ## Run the search script
 
 ```bash
