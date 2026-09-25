@@ -31,6 +31,7 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 | Logo creation, generation | `brand` | Bundled sibling skill |
 | Tokens, specs, CSS vars | `design-system` | Bundled sibling skill |
 | shadcn/ui, Tailwind, code | `styling` | Bundled sibling skill |
+| SVG icons, icon sets | `icon` | Bundled sibling skill |
 | CIP mockups, deliverables | CIP (built-in) | `references/cip-design.md` |
 | Presentations, pitch decks | Slides (built-in) | `references/slides.md` |
 | Banners, covers, headers | Banner (built-in) | `references/banner-sizes-and-styles.md` |
@@ -206,7 +207,6 @@ Load `references/social-photos-design.md` for sizes, templates, best practices.
 | Slides Strategy | `references/slides-strategies.md` |
 | Banner Sizes & Styles | `references/banner-sizes-and-styles.md` |
 | Social Photos Guide | `references/social-photos-design.md` |
-| Icon Design Guide | `references/icon-design.md` |
 
 ## Scripts
 
@@ -229,5 +229,5 @@ python3 --version || python --version
 
 ## Integration
 
-**Bundled sub-skills:** brand, design-system, styling
+**Bundled sub-skills:** brand, design-system, styling, icon
 **Related Skills:** search
